@@ -2,6 +2,7 @@
 using Sitecore.Analytics.Data;
 using Sitecore.Analytics.Tracking;
 using Sitecore.Configuration;
+using Sitecore.MediaFramework;
 using Sitecore.SecurityModel.License;
 
 namespace Brightcove.MediaFramework.Brightcove.Analytics
@@ -18,6 +19,23 @@ namespace Brightcove.MediaFramework.Brightcove.Analytics
                 Tracker.StartTracking();
             if (Tracker.Current.CurrentPage == null)
                 return;
+            switch (eventData.Name.ToLowerInvariant())
+            {
+                case "playbackstarted":
+                    eventData.PageEventDefinitionId = ItemIDs.PageEvents.PlaybackStarted.ToGuid();
+                    break;
+                case "playbackcompleted":
+                    eventData.PageEventDefinitionId = ItemIDs.PageEvents.PlaybackCompleted.ToGuid();
+                    break;
+                case "playbackchanged":
+                    eventData.PageEventDefinitionId = ItemIDs.PageEvents.PlaybackChanged.ToGuid();
+                    break;
+                case "playbackerror":
+                    eventData.PageEventDefinitionId = ItemIDs.PageEvents.PlaybackError.ToGuid();
+                    break;
+                default:
+                    break;
+            }
             ((IPageContext)Tracker.Current.CurrentPage).Register(eventData);
         }
     }
