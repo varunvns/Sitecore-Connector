@@ -5,6 +5,7 @@ using Sitecore.Configuration;
 using Sitecore.RestSharp;
 using Sitecore.Web.UI.HtmlControls;
 using Sitecore.Diagnostics;
+using System.Text;
 
 namespace Brightcove.MediaFramework.Brightcove.Proxy
 {
@@ -31,9 +32,15 @@ namespace Brightcove.MediaFramework.Brightcove.Proxy
             request.AddOffset(offset)
                 .AddLimit(limit);
             var response = context.Read<Entities.Collections.PagedCollection<T>>(requestName, request.Parameters);
-            if (response.ContentLength < 1000)
+            if (response != null && Configuration.Settings.EnableAdvancedLogging)
             {
-                Log.Info("Reponse content: " + response.Content.ToString(), this);
+                var hsb = new StringBuilder();
+                foreach (var h in response.Headers)
+                {
+                    hsb.Append(h.Name + ":" + h.Value);
+                }
+                Log.Info("Brightcove response headers: " + hsb.ToString(), this);
+                Log.Info("Brightcove reponse content: " + response.Content.ToString(), this);
             }
             return response == null ? null : response.Data;
         }
@@ -69,7 +76,7 @@ namespace Brightcove.MediaFramework.Brightcove.Proxy
         {
             var context = this.CreateContext();
             var request = new RestRequest()
-                .AddId(idParameterName, id); 
+                .AddId(idParameterName, id);
             var response = context.Delete<object>(requestName, request.Parameters);
             return response != null;
         }
@@ -78,7 +85,7 @@ namespace Brightcove.MediaFramework.Brightcove.Proxy
         {
             var context = this.CreateContext();
             var request = new RestRequest()
-                .AddId(idParameterName, id); 
+                .AddId(idParameterName, id);
             var response = context.Read<T>(requestName, request.Parameters);
             return response == null ? null : response.Data;
         }
