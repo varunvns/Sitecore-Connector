@@ -4,6 +4,7 @@ using RestSharp;
 using Sitecore.Configuration;
 using Sitecore.RestSharp;
 using Sitecore.Web.UI.HtmlControls;
+using Sitecore.Diagnostics;
 
 namespace Brightcove.MediaFramework.Brightcove.Proxy
 {
@@ -30,6 +31,10 @@ namespace Brightcove.MediaFramework.Brightcove.Proxy
             request.AddOffset(offset)
                 .AddLimit(limit);
             var response = context.Read<Entities.Collections.PagedCollection<T>>(requestName, request.Parameters);
+            if (response.ContentLength < 1000)
+            {
+                Log.Info("Reponse content: " + response.Content.ToString(), this);
+            }
             return response == null ? null : response.Data;
         }
 
