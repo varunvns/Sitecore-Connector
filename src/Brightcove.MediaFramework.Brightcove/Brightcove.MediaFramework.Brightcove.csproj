@@ -165,7 +165,9 @@
     <Compile Include="Analytics\PlaylistEventTrigger.cs" />
     <Compile Include="Analytics\VideoEventTrigger.cs" />
     <Compile Include="Entities\VideoSharing.cs" />
+    <Compile Include="Import\VideoCollectionImporterForce.cs" />
     <Compile Include="Pipelines\MediaGenerateMarkup\GetPlaybackEvents.cs" />
+    <Compile Include="Pipelines\MediaSyncImport\ForceSyncClear.cs" />
     <Compile Include="TextResult.cs" />
     <Compile Include="Commands\TextTracks.cs" />
     <Compile Include="Commands\CustomFields.cs" />

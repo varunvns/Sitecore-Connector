@@ -50,3 +50,6 @@ C:\Source\Sitecore-8.x-Media-Framework-2.x-Connector\src\Web\bin\RestSharp.xml
 C:\Source\Sitecore-8.x-Media-Framework-2.x-Connector\src\Web\obj\Debug\Web.dll
 C:\Source\Sitecore-8.x-Media-Framework-2.x-Connector\src\Web\obj\Debug\Web.pdb
 C:\Source\Sitecore-8.x-Media-Framework-2.x-Connector\src\Web\bin\Sitecore.Kernel.dll
+C:\Source\Sitecore-8.x-Media-Framework-2.x-Connector\src\Web\bin\Lucene.Net.dll
+C:\Source\Sitecore-8.x-Media-Framework-2.x-Connector\src\Web\bin\Lucene.Net.pdb
+C:\Source\Sitecore-8.x-Media-Framework-2.x-Connector\src\Web\bin\Lucene.Net.xml
