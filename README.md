@@ -1,4 +1,4 @@
-#Brightcove Connector for Sitecore Media Framework
+# Brightcove Connector for Sitecore Media Framework
 
 # License
 
