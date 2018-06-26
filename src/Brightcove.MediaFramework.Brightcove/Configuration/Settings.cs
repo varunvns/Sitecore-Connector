@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using Brightcove.MediaFramework.Brightcove.Entities;
 using Sitecore.SecurityModel.License;
 
 namespace Brightcove.MediaFramework.Brightcove.Configuration
