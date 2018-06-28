@@ -21,6 +21,7 @@
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,6 +131,8 @@
     <Content Include="App_Config\Include\Sitecore.MediaFramework.Services.Brightcove.config" />
     <Content Include="App_Config\Include\Sitecore.RestSharp.Brightcove.config" />
     <Content Include="sitecore modules\Web\MediaFramework\js\fancybox\ajax-loader.gif" />
+    <Content Include="sitecore\shell\Controls\Rich Text Editor\EmbedMedia\EmbedMedia.js" />
+    <Content Include="sitecore\shell\Controls\Rich Text Editor\EmbedMedia\EmbedMedia.xml" />
     <Content Include="sitecore\shell\Themes\Standard\MediaFramework\Brightcove\128x128\logo.png" />
     <Content Include="sitecore\shell\Themes\Standard\MediaFramework\Brightcove\16x16\logo.png" />
     <Content Include="sitecore\shell\Themes\Standard\MediaFramework\Brightcove\24x24\logo.png" />

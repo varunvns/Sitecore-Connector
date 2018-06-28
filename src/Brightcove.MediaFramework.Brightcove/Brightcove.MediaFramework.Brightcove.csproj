@@ -166,6 +166,7 @@
     <Compile Include="Analytics\VideoEventTrigger.cs" />
     <Compile Include="Entities\VideoSharing.cs" />
     <Compile Include="Import\VideoCollectionImporterForce.cs" />
+    <Compile Include="Pipelines\MediaGenerateMarkup\GenerateMarkup.cs" />
     <Compile Include="Pipelines\MediaGenerateMarkup\GetPlaybackEvents.cs" />
     <Compile Include="Pipelines\MediaSyncImport\ForceSyncClear.cs" />
     <Compile Include="TextResult.cs" />
@@ -200,8 +201,6 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\VideoCustomFieldsController.cs" />
-    <Compile Include="Debug\DebugRestClient.cs" />
-    <Compile Include="Debug\DebugRestContext.cs" />
     <Compile Include="Entities\AccessToken.cs" />
     <Compile Include="Entities\AssetRendition.cs" />
     <Compile Include="Entities\Collections\AssetRenditionCollection.cs" />
@@ -261,6 +260,7 @@
     <Compile Include="Synchronize\References\PlaylistVideoSynchronizer.cs" />
     <Compile Include="Synchronize\References\VideoTagsSynchronizer.cs" />
     <Compile Include="Synchronize\VideoSynchronizer.cs" />
+    <Compile Include="UI\Rendering\EmbedMedia.cs" />
     <Compile Include="Upload\IVideoUploadService%271.cs" />
     <Compile Include="Upload\MediaItem\FileStorageManager.cs" />
     <Compile Include="Upload\MediaItem\StorageExecutor.cs">
@@ -280,7 +280,9 @@
     <Compile Include="Upload\VideoUploadExecutorBase.cs" />
     <Compile Include="Upload\VideoUploader.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Debug\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
