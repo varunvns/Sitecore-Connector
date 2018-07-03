@@ -100,7 +100,7 @@ namespace Brightcove.MediaFramework.Brightcove.Pipelines.MediaGenerateMarkup
         width = height = String.Empty;
       }
       // Add autoplay
-      if (args.Properties.Collection[BrightcovePlayerParameters.Autoplay] == Brightcove.Constants.SizingResponsive)
+      if (args.Properties.Collection[BrightcovePlayerParameters.Autoplay] != null)
       {
         autoplay = "autoplay='true'";
       }
