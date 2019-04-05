@@ -10,6 +10,7 @@ namespace Sitecore.MediaFramework.Mvc.Pipelines.RequestEnd
   using Sitecore.MediaFramework.Mvc.Text;
   using Sitecore.Mvc.Pipelines.Request.RequestEnd;
   using Sitecore.Mvc.Presentation;
+  using System.Linq;
 
   public class InjectResources : RequestEndProcessor
   {
@@ -29,10 +30,15 @@ namespace Sitecore.MediaFramework.Mvc.Pipelines.RequestEnd
         {
           return;
         }
+        var apipath = Sitecore.Configuration.Settings.GetSetting("Sitecore.MediaFramework.Mvc.ApiPath", "api/sitecore/");
+        if (apipath.Split('|').ToList().Any(Sitecore.Links.LinkManager.GetItemUrl(pageContext.Item).Contains))
+        {
+          return;
+        }
 
         RequestContext requestContext = pageContext.RequestContext;
         Stream stream = requestContext.HttpContext.Response.Filter;
-
+               
         if (stream != null && this.Updaters.Count > 0)
         {
           requestContext.HttpContext.Response.Filter = new HtmlUpdateFilter(stream, this.Updaters);
