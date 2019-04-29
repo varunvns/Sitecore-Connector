@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brightcove.MediaFramework.Brightcove", "Brightcove.MediaFramework.Brightcove\Brightcove.MediaFramework.Brightcove.csproj", "{C4CE22B6-2F6F-456D-A502-7914DBC3CEA8}"
 EndProject
@@ -109,5 +109,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+		SolutionGuid = {F895568A-2F76-4E3A-8F6C-3FE724C54852}
 	EndGlobalSection
 EndGlobal
