@@ -1,46 +1,47 @@
 ﻿
 namespace Sitecore.MediaFramework.Mvc.Pipelines.RequestEnd
 {
-  using System;
-  using System.Collections.Generic;
-  using System.IO;
-  using System.Web.Routing;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Web.Routing;
 
-  using Sitecore.MediaFramework.Mvc.IO;
-  using Sitecore.MediaFramework.Mvc.Text;
-  using Sitecore.Mvc.Pipelines.Request.RequestEnd;
-  using Sitecore.Mvc.Presentation;
+    using Sitecore.MediaFramework.Mvc.IO;
+    using Sitecore.MediaFramework.Mvc.Text;
+    using Sitecore.Mvc.Pipelines.Request.RequestEnd;
+    using Sitecore.Mvc.Presentation;
+    using System.Linq;
 
-  public class InjectResources : RequestEndProcessor
-  {
-    protected List<IHtmlUpdater> Updaters { get; set; }
-
-    public InjectResources()
+    public class InjectResources : RequestEndProcessor
     {
-      this.Updaters = new List<IHtmlUpdater>();
-    }
+        protected List<IHtmlUpdater> Updaters { get; set; }
 
-    public override void Process(RequestEndArgs args)
-    {
-      try
-      {
-        PageContext pageContext = args.PageContext;
-        if (pageContext == null)
+        public InjectResources()
         {
-          return;
+            this.Updaters = new List<IHtmlUpdater>();
         }
 
-        RequestContext requestContext = pageContext.RequestContext;
-        Stream stream = requestContext.HttpContext.Response.Filter;
-
-        if (stream != null && this.Updaters.Count > 0)
+        public override void Process(RequestEndArgs args)
         {
-          requestContext.HttpContext.Response.Filter = new HtmlUpdateFilter(stream, this.Updaters);
+            try
+            {
+                PageContext pageContext = args.PageContext;
+                if (pageContext == null || pageContext.Item == null)
+                {
+                    return;
+                }
+
+                RequestContext requestContext = pageContext.RequestContext;
+                Stream stream = requestContext.HttpContext.Response.Filter;
+
+                if (stream != null && this.Updaters.Count > 0)
+                {
+                    requestContext.HttpContext.Response.Filter = new HtmlUpdateFilter(stream, this.Updaters);
+                }
+            }
+            catch (InvalidOperationException)
+            {
+            }
         }
-      }
-      catch (InvalidOperationException)
-      {
-      }
     }
-  }
 }

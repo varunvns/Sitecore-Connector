@@ -213,3 +213,4 @@ results
 npm-debug.log
 .DS_Store
 code/.vs/config/applicationhost.config
+/src/.vs/Brightcove.MediaFramework.Brightcove/v15/Server/sqlite3
