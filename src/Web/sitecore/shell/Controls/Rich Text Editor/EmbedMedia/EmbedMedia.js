@@ -14,8 +14,6 @@ function getRadWindow() {
 	return null;
 }
 
-var isRadWindow = true;
-
 var radWindow = getRadWindow();
 
 if (radWindow) {
