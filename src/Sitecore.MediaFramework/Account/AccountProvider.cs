@@ -68,7 +68,8 @@
 
     public virtual bool IsValidAccount(Item accountItem)
     {
-      return accountItem.IsValidItem();
+      return (!string.IsNullOrEmpty(accountItem[ItemIDs.ClientId]) && !string.IsNullOrEmpty(accountItem[ItemIDs.ClientSecret]) && !string.IsNullOrEmpty(accountItem[ItemIDs.PublisherId]));
+      //return accountItem.IsValidItem();
     }
 
     public virtual List<Item> GetPlayers(Item accountItem)
