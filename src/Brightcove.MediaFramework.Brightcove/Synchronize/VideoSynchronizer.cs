@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web;
+using Brightcove.MediaFramework.Brightcove.Configuration;
 using Brightcove.MediaFramework.Brightcove.Entities;
 using Sitecore.Data.Items;
 
@@ -23,13 +24,56 @@ namespace Brightcove.MediaFramework.Brightcove.Synchronize
         public override Item UpdateItem(object entity, Item accountItem, Item item)
         {
             Video video = (Video)entity;
+
+            string thumbnailSrc = null;
+
+            if (video.Images.Thumbnail != null && video.Images.Thumbnail.Sources != null)
+            {
+                foreach (var imageSrc in video.Images.Thumbnail.Sources)
+                {
+                    if (Settings.EnableSecureImages && imageSrc.Src.StartsWith("https://"))
+                    {
+                        thumbnailSrc = imageSrc.Src;
+                    }
+                    else if (!Settings.EnableSecureImages && imageSrc.Src.StartsWith("http://"))
+                    {
+                        thumbnailSrc = imageSrc.Src;
+                    }
+                }
+            }
+            else
+            {
+                thumbnailSrc = video.Images.Thumbnail?.Src?.Replace("http://", "https://");
+            }
+
+            string posterSrc = null;
+
+            if (video.Images.Poster != null && video.Images.Poster.Sources != null)
+            {
+                foreach (var imageSrc in video.Images.Poster.Sources)
+                {
+                    if (Settings.EnableSecureImages && imageSrc.Src.StartsWith("https://"))
+                    {
+                        posterSrc = imageSrc.Src;
+                    }
+                    else if (!Settings.EnableSecureImages && imageSrc.Src.StartsWith("http://"))
+                    {
+                        posterSrc = imageSrc.Src;
+                    }
+                }
+            }
+            else
+            {
+                posterSrc = video.Images.Poster?.Src?.Replace("http://", "https://");
+            }
+
             using (new EditContext(item))
             {
                 item.Name = ItemUtil.ProposeValidItemName(video.Name);
                 item[FieldIDs.MediaElement.Id] = video.Id;
                 item[FieldIDs.MediaElement.Name] = video.Name;
                 item[FieldIDs.MediaElement.ReferenceId] = video.ReferenceId;
-                item[FieldIDs.MediaElement.ThumbnailUrl] = (video.Images != null && video.Images.Thumbnail != null) ? video.Images.Thumbnail.Src?.Replace("http://","https://") : null;
+                item[FieldIDs.MediaElement.ThumbnailUrl] = thumbnailSrc;
                 item[FieldIDs.MediaElement.ShortDescription] = video.ShortDescription;
                 item[FieldIDs.Video.CreationDate] = video.CreationDate.ToString();
                 item[FieldIDs.Video.LongDescription] = video.LongDescription;
@@ -38,7 +82,7 @@ namespace Brightcove.MediaFramework.Brightcove.Synchronize
                 item[FieldIDs.Video.Economics] = video.Economics.ToString();
                 item[FieldIDs.Video.LinkUrl] = video.Link != null ? video.Link.URL : null;
                 item[FieldIDs.Video.LinkText] = video.Link != null ? video.Link.Text : null;
-                item[FieldIDs.Video.VideoStillUrl] = (video.Images != null && video.Images.Poster != null) ? video.Images.Poster.Src?.Replace("http://", "https://") : null;
+                item[FieldIDs.Video.VideoStillUrl] = posterSrc;
                 item[FieldIDs.Video.CustomFields] = this.GetCustomFields(video);
                 item[FieldIDs.Video.Duration] = video.Duration.HasValue ? video.Duration.ToString() : string.Empty;
                 item[FieldIDs.Video.IngestJobId] = video.IngestJobId;
@@ -64,8 +108,49 @@ namespace Brightcove.MediaFramework.Brightcove.Synchronize
 
             Video video = (Video)entity;
             VideoSearchResult videoSearchResult = (VideoSearchResult)searchResult;
-            var thumbnailSrc = video.Images.Thumbnail != null ? video.Images.Thumbnail.Src?.Replace("http://", "https://") : null;
-            var posterSrc = video.Images.Poster != null ? video.Images.Poster.Src?.Replace("http://", "https://") : null;
+
+            string thumbnailSrc = null;
+
+            if(video.Images.Thumbnail != null && video.Images.Thumbnail.Sources != null)
+            {
+                foreach(var imageSrc in video.Images.Thumbnail.Sources)
+                {
+                    if(Settings.EnableSecureImages && imageSrc.Src.StartsWith("https://"))
+                    {
+                        thumbnailSrc = imageSrc.Src;
+                    }
+                    else if(!Settings.EnableSecureImages && imageSrc.Src.StartsWith("http://"))
+                    {
+                        thumbnailSrc = imageSrc.Src;
+                    }
+                }
+            }
+            else
+            {
+                thumbnailSrc = video.Images.Thumbnail?.Src?.Replace("http://", "https://");
+            }
+
+            string posterSrc = null;
+
+            if (video.Images.Poster != null && video.Images.Poster.Sources != null)
+            {
+                foreach (var imageSrc in video.Images.Poster.Sources)
+                {
+                    if (Settings.EnableSecureImages && imageSrc.Src.StartsWith("https://"))
+                    {
+                        posterSrc = imageSrc.Src;
+                    }
+                    else if (!Settings.EnableSecureImages && imageSrc.Src.StartsWith("http://"))
+                    {
+                        posterSrc = imageSrc.Src;
+                    }
+                }
+            }
+            else
+            {
+                posterSrc = video.Images.Poster?.Src?.Replace("http://", "https://");
+            }
+
             if (Sitecore.Integration.Common.Utils.StringUtil.EqualsIgnoreNullEmpty(video.LastModifiedDate.ToString(), videoSearchResult.LastModifiedDate) && (Sitecore.Integration.Common.Utils.StringUtil.EqualsIgnoreNullEmpty(thumbnailSrc, videoSearchResult.ThumbnailUrl)))
                 return !Sitecore.Integration.Common.Utils.StringUtil.EqualsIgnoreNullEmpty(posterSrc, videoSearchResult.VideoStillURL);
             return true;
