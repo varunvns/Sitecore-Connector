@@ -49,6 +49,19 @@ namespace Brightcove.MediaFramework.Brightcove.Configuration
             }
         }
 
+        public static bool EnableSecureImages
+        {
+            get
+            {
+                var enableSecureImage = Sitecore.Configuration.Settings.GetSetting("Brightcove.EnableSecureImages", "false");
+                if (bool.TryParse(enableSecureImage, out bool isSecureImageEnabled))
+                {
+                    return isSecureImageEnabled;
+                }
+                return false;
+            }
+        }
+
         public static string FileDownloadRouteTemplate
         {
             get { return CommandRoutePrefix + Constants.BrightcoveFileDownloadRouteTemplate; }
