@@ -32,6 +32,7 @@
         <patch:attribute name="value">640,360</patch:attribute>
       </setting>
       <setting name="Brightcove.IndexName" value="sitecore_master_index" />
+      <setting name="Brightcove.EnableSecureImages" value="true" />
     </settings>
 
     <commands>
