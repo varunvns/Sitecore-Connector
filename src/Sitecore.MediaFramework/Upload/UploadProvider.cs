@@ -14,6 +14,8 @@
   using Sitecore.Diagnostics;
   using Sitecore.Globalization;
   using Sitecore.Jobs;
+  using Job = Sitecore.Jobs.DefaultJob;
+  using JobOptions = Sitecore.Jobs.DefaultJobOptions;
   using Sitecore.MediaFramework.Common;
   using Sitecore.MediaFramework.Diagnostics;
 
@@ -255,7 +257,7 @@
               var name = string.Format("MediaFramework_Upload_{0}_{1}", account.ID, responce.ID);
               var options = new JobOptions(name, "MediaFramework", Context.Site.Name, uploadProcess, "Execute");
 
-              var job = new Job(options);
+              var job = new DefaultJob(options);
               JobManager.Start(job);
             }
 

@@ -4,6 +4,7 @@
   using System.Threading;
 
   using Sitecore.Jobs;
+  using JobOptions = Sitecore.Jobs.DefaultJobOptions;
   using Sitecore.MediaFramework.Pipelines.MediaExport;
   using Sitecore.Pipelines;
   using Sitecore.Shell.Framework.Commands;

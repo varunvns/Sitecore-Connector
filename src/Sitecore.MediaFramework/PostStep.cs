@@ -12,6 +12,8 @@
   using Sitecore.IO;
   using Sitecore.Install.Framework;
   using Sitecore.Jobs;
+  using Job = Sitecore.Abstractions.BaseJob;
+  using JobOptions = Sitecore.Jobs.DefaultJobOptions;
   using Sitecore.MediaFramework.Diagnostics;
   using Sitecore.Shell.Applications.Globalization.ImportLanguage;
 

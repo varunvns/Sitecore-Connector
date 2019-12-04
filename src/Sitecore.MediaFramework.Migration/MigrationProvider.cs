@@ -13,6 +13,7 @@ namespace Sitecore.MediaFramework.Migration
   using Sitecore.Globalization;
   using Sitecore.Integration.Common.Extensions;
   using Sitecore.Jobs;
+  using Job = Sitecore.Abstractions.BaseJob;
   using Sitecore.MediaFramework.Diagnostics;
   using Sitecore.MediaFramework.Migration.Migrators;
 

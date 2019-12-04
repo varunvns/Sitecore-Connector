@@ -10,6 +10,7 @@
   using Sitecore.Data.Items;
   using Sitecore.Diagnostics;
   using Sitecore.Jobs;
+  using JobOptions = Sitecore.Jobs.DefaultJobOptions;
   using Sitecore.MediaFramework.Account;
   using Sitecore.MediaFramework.Diagnostics;
   using Sitecore.MediaFramework.Schedulers;

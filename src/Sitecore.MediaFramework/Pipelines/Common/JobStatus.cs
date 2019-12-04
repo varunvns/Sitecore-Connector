@@ -3,6 +3,7 @@ namespace Sitecore.MediaFramework.Pipelines.Common
 {
   using Sitecore.Globalization;
   using Sitecore.Jobs;
+  using Job = Sitecore.Abstractions.BaseJob;
   using Sitecore.Pipelines;
 
   /// <summary>

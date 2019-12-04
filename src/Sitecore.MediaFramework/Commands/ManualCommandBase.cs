@@ -7,6 +7,7 @@
   using Sitecore.Diagnostics;
   using Sitecore.Integration.Common.Commands;
   using Sitecore.Jobs;
+  using JobOptions = Sitecore.Jobs.DefaultJobOptions;
   using Sitecore.MediaFramework.Account;
   using Sitecore.MediaFramework.Diagnostics;
   using Sitecore.MediaFramework.Scopes;

@@ -6,6 +6,7 @@ namespace Sitecore.MediaFramework.Migration.Commands
   using Sitecore.Data.Items;
   using Sitecore.Diagnostics;
   using Sitecore.Jobs;
+  using JobOptions = Sitecore.Jobs.DefaultJobOptions;
   using Sitecore.Shell.Framework.Commands;
   using Sitecore.Shell.Framework.Jobs;
   using Sitecore.Web.UI.Sheer;
