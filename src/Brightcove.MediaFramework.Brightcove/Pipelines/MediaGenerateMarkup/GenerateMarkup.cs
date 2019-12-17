@@ -74,16 +74,15 @@ namespace Brightcove.MediaFramework.Brightcove.Pipelines.MediaGenerateMarkup
       return url.ToString();
     }
 
-    public virtual string GenerateBrightcoveUrl(MediaGenerateMarkupArgs args)
+    public virtual string GenerateBrightcoveUrl(MediaGenerateMarkupArgs args, bool isJs)
     {
-      var url = new UrlString($"//players.brightcove.net/{args.AccountItem[BrightcovePlayerParameters.PublisherId]}/{args.PlayerItem[BrightcovePlayerParameters.PlayerId]}_default/index.min.js");
+      var resource = isJs ? "index.min.js" : $"index.html?videoId={args.MediaItem[BrightcovePlayerParameters.MediaId]}";
+      var url = new UrlString($"//players.brightcove.net/{args.AccountItem[BrightcovePlayerParameters.PublisherId]}/{args.PlayerItem[BrightcovePlayerParameters.PlayerId]}_default/{resource}");
       return url.ToString();
     }
 
     protected virtual string GenerateJavascriptEmbed(MediaGenerateMarkupArgs args)
     {
-      string width = $"width='{args.Properties.Width}'";
-      string height = $"height='{args.Properties.Height}'";
       string responsive = String.Empty;
       string responsiveStyle = String.Empty;
       string responsiveClosingTags = String.Empty;
@@ -97,17 +96,16 @@ namespace Brightcove.MediaFramework.Brightcove.Pipelines.MediaGenerateMarkup
         responsive = $"<div style='position: relative; display: block; max-width: {args.Properties.Width}px;'><div style='padding-top: {calcPadding}%;'>";
         responsiveStyle = "style='position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; width: 100%; height: 100%;'";
         responsiveClosingTags = "</div></div>";
-        width = height = String.Empty;
       }
       // Add autoplay
-      if (args.Properties.Collection[BrightcovePlayerParameters.Autoplay] == Brightcove.Constants.SizingResponsive)
+      if (args.Properties.Collection[BrightcovePlayerParameters.Autoplay] != null)
       {
-        autoplay = "autoplay='true'";
+        autoplay = "autoplay='autoplay'";
       }
       // Add muted
       if (args.Properties.Collection[BrightcovePlayerParameters.Muted] != null)
       {
-        muted = "muted='true'";
+        muted = "muted='muted'";
       }
       
 	    return $@"{responsive}
@@ -119,7 +117,7 @@ namespace Brightcove.MediaFramework.Brightcove.Pipelines.MediaGenerateMarkup
 	                class='video-js' 
 	                controls='true' {autoplay} {muted} 
 	                {responsiveStyle}></video>
-                  <script src='{this.GenerateBrightcoveUrl(args)}'></script>
+                  <script src='{this.GenerateBrightcoveUrl(args, true)}'></script>
                 {responsiveClosingTags}";
     }
 
@@ -142,28 +140,14 @@ namespace Brightcove.MediaFramework.Brightcove.Pipelines.MediaGenerateMarkup
         width = height = String.Empty;
       }
 
-      // Add autoplay and/ or muted query string
-      if (args.Properties.Collection[BrightcovePlayerParameters.Autoplay] != null ||
-          args.Properties.Collection[BrightcovePlayerParameters.Muted] != null)
-      {
-        queryStr = "?";
-        if (args.Properties.Collection[BrightcovePlayerParameters.Autoplay] != null &&
-            args.Properties.Collection[BrightcovePlayerParameters.Muted] != null)
-        {
-          queryStr += "autoplay='1'&muted='1'";
-        }
-        else
-        {
-          if (args.Properties.Collection[BrightcovePlayerParameters.Autoplay] != null)
-            queryStr += "autoplay='1'";
-          if (args.Properties.Collection[BrightcovePlayerParameters.Muted] != null)
-            queryStr += "muted='1'";
-        }
-      }
+      if (args.Properties.Collection[BrightcovePlayerParameters.Autoplay] != null)
+        queryStr += "&autoplay=true";
+      if (args.Properties.Collection[BrightcovePlayerParameters.Muted] != null)
+        queryStr += "&muted=true";
 
       return $@"{responsive}
-                <iframe scrolling='no' class='player-frame' {width} {height} frameborder='0' 
-                  src='{this.GenerateFrameUrl(args)}{queryStr}' {responsiveStyle}></iframe>
+                <iframe scrolling='no' class='player-frame' {width} {height} frameborder='0' allowfullscreen='' webkitallowfullscreen='' mozallowfullscreen=''
+                  src='{this.GenerateBrightcoveUrl(args, false)}{queryStr}' {responsiveStyle}></iframe>
               {responsiveClosingTags}";
     }
   }
