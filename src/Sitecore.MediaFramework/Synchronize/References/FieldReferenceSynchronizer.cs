@@ -19,7 +19,7 @@
         return null;
       }
 
-      if (!field.CanWrite)
+      if (!field.CanUserWrite(Context.User))
       {
         LogHelper.Warn(string.Format("Field {0} from item({1}) does not have write permissions", field.Name, field.Item.ID), this);
 
