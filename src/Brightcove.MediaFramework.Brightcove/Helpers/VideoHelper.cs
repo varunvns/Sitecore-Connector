@@ -47,7 +47,7 @@ namespace Brightcove.MediaFramework.Brightcove.Helpers
                     sitecoreItem[FieldIDs.Video.IngestStatus] = value;
                     sitecoreItem.Editing.EndEdit();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //Revert the Changes
                     sitecoreItem.Editing.CancelEdit();

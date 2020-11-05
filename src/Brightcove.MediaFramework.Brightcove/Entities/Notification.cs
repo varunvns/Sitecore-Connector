@@ -20,7 +20,7 @@ namespace Brightcove.MediaFramework.Brightcove.Entities
         [JsonProperty("action", NullValueHandling = NullValueHandling.Ignore)]
         public string Action { get; set; }
 
-        public string ToString()
+        public override string ToString()
         {
             return string.Format("brightcove notification - (entity:{0},entityType:{1},status:{2},version:{3},action:{4})", Entity, EntityType, Status, Version, Action);
         }

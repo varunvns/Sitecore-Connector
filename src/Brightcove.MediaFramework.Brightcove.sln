@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MediaFramework.Mig
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MediaFramework.Mvc", "Sitecore.MediaFramework.Mvc\Sitecore.MediaFramework.Mvc.csproj", "{D641D8FE-7A26-400C-98AB-62DA576BBC32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MediaFramework.Test", "Sitecore.MediaFramework.Test\Sitecore.MediaFramework.Test.csproj", "{1A1602DB-8B3C-4075-8028-0BF3BBCCB774}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug 7.1|Any CPU = Debug 7.1|Any CPU

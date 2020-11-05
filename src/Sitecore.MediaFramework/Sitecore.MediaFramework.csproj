@@ -99,8 +99,7 @@
       <HintPath>..\packages\Sitecore.ExperienceAnalytics.Reduce.9.3.0\lib\net471\Sitecore.ExperienceAnalytics.Reduce.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Integration.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sitecore.Integration.Common.NoReferences.2.2.160927\lib\NET452\Sitecore.Integration.Common.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Sitecore.Integration.Common.1.0.46\lib\net45\Sitecore.Integration.Common.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel, Version=14.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Kernel.9.3.0\lib\net471\Sitecore.Kernel.dll</HintPath>
@@ -479,7 +478,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="web.Debug 7.1.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
