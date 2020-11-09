@@ -74,7 +74,7 @@ namespace Sitecore.MediaFramework.Cleanup
 
     protected abstract string GetSearchResultId(TSearchResult searchResult);
 
-    [CanBeNull]
+    //[CanBeNull]
     protected virtual List<TEntity> GetServiceData(Item accountItem)
     {
       return ImportManager.ImportList<TEntity>(this.ImportName, accountItem);

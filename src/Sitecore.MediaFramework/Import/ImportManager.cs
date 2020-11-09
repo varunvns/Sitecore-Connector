@@ -44,13 +44,13 @@ namespace Sitecore.MediaFramework.Import
 
     #endregion
 
-    [CanBeNull]
+    //[CanBeNull]
     public static IEnumerable<object> Import(string importName, Item accountItem)
     {
       return Provider.Import(importName, accountItem);
     }
 
-    [CanBeNull]
+    //[CanBeNull]
     public static List<T> ImportList<T>(string importName, Item accountItem)
     {
       return Provider.ImportList<T>(importName, accountItem);

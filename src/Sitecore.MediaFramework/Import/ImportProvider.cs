@@ -33,7 +33,7 @@ namespace Sitecore.MediaFramework.Import
     /// <returns>
     /// The <see cref="IEnumerable"/>.
     /// </returns>
-    [CanBeNull]
+    //[CanBeNull]
     public virtual IEnumerable<object> Import(string importName, Item accountItem)
     {
       IImportExecuter import = MediaFrameworkContext.GetImportExecuter(importName);
@@ -41,7 +41,7 @@ namespace Sitecore.MediaFramework.Import
       return import != null ? import.GetData(accountItem) : null;
     }
 
-    [CanBeNull]
+    //[CanBeNull]
     public virtual List<T> ImportList<T>(string importName, Item accountItem)
     {
       var data = this.Import(importName, accountItem);
