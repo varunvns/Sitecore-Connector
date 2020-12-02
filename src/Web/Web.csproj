@@ -195,6 +195,7 @@
     <Content Include="sitecore modules\Web\MediaFramework\MVC\Views\EmbedMedia.cshtml" />
     <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Common\Layouts\Renderings\MediaFramework\ExperienceAnalyticsListControl.cshtml" />
     <Content Include="sitecore modules\Web\MediaFramework\Upload\MediaUpload.ashx" />
+    <Content Include="sitecore modules\Web\MediaFramework\MVC\Views\Web.config" />
     <None Include="web.config">
       <SubType>Designer</SubType>
     </None>
