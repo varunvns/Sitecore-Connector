@@ -1,7 +1,7 @@
 ﻿namespace Sitecore.MediaFramework.Commands
 {
   using System;
-
+  using System.Text.RegularExpressions;
   using Sitecore.Data;
   using Sitecore.Diagnostics;
   using Sitecore.Layouts;
@@ -13,6 +13,11 @@
   [Serializable]
   public class EmbedMedia : Command
   {
+
+    private const string GuidRegex = @"[{(]?[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]?";
+    private const string ItemIdGroupName = "itemid";
+    private static readonly Regex ItemIdRegex = new Regex(@"item(\-)?[I|i]d=(\')?(?'" + ItemIdGroupName + "'" + GuidRegex + ")");
+
     public override void Execute(CommandContext context)
     {
       Context.ClientPage.Start(this, "Run", context.Parameters);
@@ -77,13 +82,12 @@
 
           UrlString url = new UrlString(this.GetParameters(args.Result));
 
-          string itemId = url[Constants.PlayerParameters.ItemId];
+          var itemId = GetItemId(args.Result);
 
           url.Remove(Constants.PlayerParameters.ItemId);
 
-          rendering.Datasource = new ID(itemId).ToString();
+          rendering.Datasource = itemId.ToString();
           rendering.Parameters = url.ToString();
-
 
           parsedLayout.Devices[deviceIndex] = device;
           var updatedLayout = parsedLayout.ToXml();
@@ -92,6 +96,19 @@
           SheerResponse.Eval("window.parent.Sitecore.PageModes.ChromeManager.handleMessage('chrome:rendering:propertiescompleted');");
         }
       }
+    }
+
+    private ID GetItemId(string embedCode)
+    {
+        if (!ItemIdRegex.IsMatch(embedCode))
+        {
+            throw new InvalidOperationException("The generated embed code is invalid");
+        }
+
+        var match = ItemIdRegex.Match(embedCode);
+        var id = ID.Parse(match.Groups[ItemIdGroupName].Value);
+
+        return id;
     }
 
     protected virtual string GetParameters(string markup)

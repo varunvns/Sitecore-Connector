@@ -78,6 +78,12 @@ namespace Brightcove.MediaFramework.Brightcove.Pipelines.MediaGenerateMarkup
     {
       var resource = isJs ? "index.min.js" : $"index.html?videoId={args.MediaItem[BrightcovePlayerParameters.MediaId]}";
       var url = new UrlString($"//players.brightcove.net/{args.AccountItem[BrightcovePlayerParameters.PublisherId]}/{args.PlayerItem[BrightcovePlayerParameters.PlayerId]}_default/{resource}");
+
+      foreach (string arg in args.Properties.Collection)
+      {
+          url[arg] = args.Properties.Collection[arg];
+      }
+
       return url.ToString();
     }
 
@@ -112,6 +118,7 @@ namespace Brightcove.MediaFramework.Brightcove.Pipelines.MediaGenerateMarkup
                 <video data-video-id='{args.MediaItem[BrightcovePlayerParameters.MediaId]}'
                   data-account='{args.AccountItem[BrightcovePlayerParameters.PublisherId]}' 
 	                data-player='{args.PlayerItem[BrightcovePlayerParameters.PlayerId]}' 
+                  data-item-id='{args.Properties.ItemId}'
 	                data-embed='default' 
 	                data-application-id 
 	                class='video-js' 
